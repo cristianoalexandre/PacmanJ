@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import utilities.RGen;
 
 public class BoardGenerator
@@ -9,8 +10,7 @@ public class BoardGenerator
     private int n_lin;
     private int n_col;
     public char not_visited = 'N';
-    
-    private Ghost[] ghosts = new Ghost[4];
+    private ArrayList <Ghost> ghosts = new ArrayList <>();
     private Pacman pacman;
     private Gum[] gums;
 
@@ -328,16 +328,11 @@ public class BoardGenerator
 
                 if (checkPersonaPossibility(lin, col))
                 {
-                    Ghost(lin,col);
+                    ghosts.add(new Ghost(lin, col));
                 }
             }
         }
-
-    
-
-    
-
-    
+    }
 
     private void placePacman()
     {
