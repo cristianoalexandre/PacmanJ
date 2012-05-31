@@ -9,10 +9,11 @@ public class BoardGenerator
     private RGen random_generator = new RGen();
     private int n_lin;
     private int n_col;
+    private int n_gums;
     public char not_visited = 'N';
-    private ArrayList <Ghost> ghosts = new ArrayList <>();
+    private ArrayList<Ghost> ghosts = new ArrayList<>();
+    private ArrayList<Gum> gums = new ArrayList<>();
     private Pacman pacman;
-    private Gum[] gums;
 
     /**
      * Constructor of class BoardGenerator
@@ -22,30 +23,30 @@ public class BoardGenerator
         board_generated = new char[11][11];
     }
 
-    public BoardGenerator(int lin, int col)
+    public BoardGenerator(int n_lin, int n_col, int n_gums)
     {
-        if (lin < 7)
+        if (n_lin < 7)
         {
-            lin = 7;
+            n_lin = 7;
         }
 
-        if (col < 7)
+        if (n_col < 7)
         {
-            col = 7;
+            n_col = 7;
         }
 
-        if (lin % 2 == 0)
+        if (n_lin % 2 == 0)
         {
-            lin++;
+            n_lin++;
         }
 
-        if (col % 2 == 0)
+        if (n_col % 2 == 0)
         {
-            col++;
+            n_col++;
         }
 
-        n_lin = lin;
-        n_col = col;
+        this.n_lin = n_lin;
+        this.n_col = n_col;
 
         board_generated = new char[n_lin][n_col];
     }
@@ -147,7 +148,7 @@ public class BoardGenerator
      */
     private boolean checkPersonaPossibility(int lin, int col)
     {
-        if (board_generated[lin][col] != Board.empty)
+        if (lin < 0 || col < 0 || board_generated[lin][col] != Board.empty)
         {
             return false;
         }
@@ -161,7 +162,7 @@ public class BoardGenerator
     /**
      * Generates the maze
      */
-    private void generateMaze()
+    private void generateBoard()
     {
         int lin = 0, col = 0;
 
@@ -180,7 +181,10 @@ public class BoardGenerator
         visitCell(lin, col);
 
         freeSomeWalls();
-
+        placeGhosts();
+        placePacman();
+        placeGums();
+        fillWithFood();
     }
 
     private void visitCell(int lin, int col)
@@ -311,10 +315,43 @@ public class BoardGenerator
      *
      * @return
      */
-    public Board nextMaze()
+    public Board nextBoard()
     {
-        generateMaze();
+        generateBoard();
         return new Board(n_lin, n_col, board_generated);
+    }
+    
+    private void fillWithFood()
+    {
+        Food food = new Food(0,0);
+        
+        for (int lin = 0; lin < n_lin; lin++)
+        {
+            for (int col = 0; col < n_col; col++)
+            {
+                if (board_generated[lin][col] == Board.empty)
+                    board_generated[lin][col] = Food.symbol;
+            }
+        }
+    }
+
+    private void placeGums()
+    {
+        for (int i = 0; i < n_gums; i++)
+        {
+            while (true)
+            {
+                int lin = random_generator.nextInt(0, n_lin);
+                int col = random_generator.nextInt(0, n_col);
+
+                if (checkPersonaPossibility(lin, col))
+                {
+                    gums.add(new Gum(lin, col));
+                    board_generated[lin][col] = Gum.symbol;
+                    break;
+                }
+            }
+        }
     }
 
     private void placeGhosts()
@@ -329,6 +366,8 @@ public class BoardGenerator
                 if (checkPersonaPossibility(lin, col))
                 {
                     ghosts.add(new Ghost(lin, col));
+                    board_generated[lin][col] = Ghost.symbol;
+                    break;
                 }
             }
         }
@@ -336,5 +375,16 @@ public class BoardGenerator
 
     private void placePacman()
     {
+        int lin = -1;
+        int col = -1;
+
+        while (!checkPersonaPossibility(lin, col))
+        {
+            lin = random_generator.nextInt(0, n_lin);
+            col = random_generator.nextInt(0, n_col);
+        }
+
+        pacman = new Pacman(lin, col);
+        board_generated[lin][col] = Pacman.symbol;
     }
 }

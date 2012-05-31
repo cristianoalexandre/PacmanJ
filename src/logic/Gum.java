@@ -2,15 +2,15 @@ package logic;
 
 public class Gum extends StaticPersona
 {
+    protected static char symbol = 'M';
+    
     public Gum()
     {
         super();
-        symbol = 'M';
     }
     
     public Gum(int lin, int col)
     {
         super(lin,col);
-        symbol = 'M';
     }
 }

@@ -2,15 +2,15 @@ package logic;
 
 public class Food extends StaticPersona
 {
+    protected static char symbol = '.';
+    
     public Food()
     {
         super();
-        symbol = 'O';
     }
 
     public Food(int lin, int col)
     {
         super(lin, col);
-        symbol = 'O';
     }
 }

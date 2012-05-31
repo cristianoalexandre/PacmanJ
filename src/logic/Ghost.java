@@ -1,7 +1,8 @@
 package logic;
 
 public class Ghost extends MovingPersona
-{
+{   
+    protected static char symbol = 'G';
     private boolean vulnerable;
     
     public Ghost()    

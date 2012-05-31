@@ -9,7 +9,18 @@ public class Game
     
     public Game()
     {
-        
+        bgen = new BoardGenerator();
+    }
+    
+    public Game(int n_lin, int n_col, int n_gum)
+    {
+        bgen = new BoardGenerator(n_lin, n_col, n_gum);
+        board = bgen.nextBoard();
+    }
+    
+    public Game(Board new_board)
+    {
+        board = new_board;
     }
     
     public void play()
@@ -19,6 +30,8 @@ public class Game
     
     public boolean isLevelOver()
     {
+        
+        
         return true;
     }
     

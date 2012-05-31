@@ -2,7 +2,6 @@ package logic;
 
 public abstract class Persona
 {
-    protected static char symbol;
     protected int[] old_position =
     {
         -1, -1
@@ -46,15 +45,6 @@ public abstract class Persona
                 || ((getLine() == persona.getLine()) && (getColumn() == persona.getColumn() - 1))
                 || ((getColumn() == persona.getColumn()) && (getLine() == persona.getLine() + 1))
                 || ((getColumn() == persona.getColumn()) && (getLine() == persona.getLine() - 1)));
-    }
-
-    /**
-     *
-     * @return Returns the symbol that represents a persona (dragon, sword or hero)
-     */
-    public char getSymbol()
-    {
-        return symbol;
     }
 
     /**
@@ -121,15 +111,5 @@ public abstract class Persona
     public boolean isDead()
     {
         return dead;
-    }
-
-    /**
-     * Sets persona's symbol as new_symbol
-     *
-     * @param new_symbol
-     */
-    public void setSymbol(char new_symbol)
-    {
-        symbol = new_symbol;
     }
 }

@@ -2,19 +2,18 @@ package logic;
 
 public class Pacman extends MovingPersona
 {
+    protected static char symbol = 'P';
     private boolean super_power; 
     
     public Pacman()
     {
         super();
-        symbol = 'P';
         super_power = false;
     }
     
     public Pacman(int lin, int col)
     {
         super(lin, col);
-        symbol = 'P';
         super_power = false;
     }
     
