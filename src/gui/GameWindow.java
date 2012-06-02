@@ -67,9 +67,19 @@ public class GameWindow extends javax.swing.JFrame
         game_menu.add(game_new_game_option);
 
         game_options_option.setText("Options");
+        game_options_option.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                game_options_optionActionPerformed(evt);
+            }
+        });
         game_menu.add(game_options_option);
 
         game_quit_option.setText("Quit");
+        game_quit_option.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                game_quit_optionActionPerformed(evt);
+            }
+        });
         game_menu.add(game_quit_option);
 
         game_menu_bar.add(game_menu);
@@ -121,6 +131,16 @@ public class GameWindow extends javax.swing.JFrame
     {//GEN-HEADEREND:event_game_new_game_optionActionPerformed
         
     }//GEN-LAST:event_game_new_game_optionActionPerformed
+
+    private void game_options_optionActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_game_options_optionActionPerformed
+    {//GEN-HEADEREND:event_game_options_optionActionPerformed
+        new OptionsDialog(this, true).setVisible(true);
+    }//GEN-LAST:event_game_options_optionActionPerformed
+
+    private void game_quit_optionActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_game_quit_optionActionPerformed
+    {//GEN-HEADEREND:event_game_quit_optionActionPerformed
+        new ConfirmExitDialog().ask();
+    }//GEN-LAST:event_game_quit_optionActionPerformed
 
     /**
      * @param args the command line arguments
