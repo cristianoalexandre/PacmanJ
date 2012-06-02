@@ -28,16 +28,21 @@ public class Game
         
     }
     
+    public void moveGhosts()
+    {
+        
+    }
+    
     public boolean isLevelOver()
     {
         
         
-        return true;
+        return false;
     }
     
     public boolean isGameOver()
     {
-        return true;
+        return false;
     }
     
     public void loseLife()

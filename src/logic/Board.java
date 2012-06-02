@@ -27,6 +27,7 @@ public class Board
         this.board = board;
     }
 
+    @Deprecated
     public void show()
     {
         for (int i = 0; i < n_lin; i++)
@@ -37,5 +38,11 @@ public class Board
             }
             System.out.println();
         }
+    }
+    
+    @Deprecated
+    public char[][] getBoard()
+    {
+        return board;
     }
 }

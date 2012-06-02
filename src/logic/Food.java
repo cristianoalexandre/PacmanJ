@@ -2,7 +2,7 @@ package logic;
 
 public class Food extends StaticPersona
 {
-    protected static char symbol = '.';
+    public static char symbol = '.';
     
     public Food()
     {
